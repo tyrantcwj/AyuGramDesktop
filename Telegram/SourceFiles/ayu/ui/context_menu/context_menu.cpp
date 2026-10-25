@@ -1,4 +1,4 @@
-// This is the source code of iTycTG for Desktop.
+// This is the source code of iTycGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -247,7 +247,7 @@ bool needToShowItem(ContextMenuVisibility state) {
 		|| (state == ContextMenuVisibility::VisibleWithModifier && base::IsExtendedContextMenuModifierPressed());
 }
 
-void AddiTycTGActions(PeerData *peerData,
+void AddiTycGramActions(PeerData *peerData,
 							   Data::Thread *thread,
 							   not_null<Window::SessionController*> sessionController,
 							   const Window::PeerMenuCallback &addCallback) {
@@ -268,7 +268,7 @@ void AddiTycTGActions(PeerData *peerData,
 	const auto topicId = topic ? topic->rootId().bare : 0;
 
 	addCallback(Window::PeerMenuCallback::Args{
-		.text = u"iTycTG"_q,
+		.text = u"iTycGram"_q,
 		.handler = nullptr,
 		.icon = &st::menuIconGroupReactions,
 		.fillSubmenu = [=](not_null<Ui::PopupMenu*> menu) {
@@ -979,26 +979,64 @@ void AddCreateFilterAction(not_null<Ui::PopupMenu*> menu,
 						   HistoryItem *item,
 						   const QString &selectedText) {
 	const auto &settings = AyuSettings::getInstance();
-	if (!needToShowItem(settings.showAddFilterInContextMenu()) || !settings.filtersEnabled()) {
+	if (!item || !needToShowItem(settings.showAddFilterInContextMenu())) {
+		return;
+	}
+	if (item->isService() || item->history()->peer->isSelf()) {
 		return;
 	}
 
-	if (!item || selectedText.isEmpty()) {
-		return;
+	auto phrase = selectedText.trimmed();
+	if (phrase.isEmpty()) {
+		phrase = item->originalText().text.trimmed();
+	}
+	auto preview = phrase;
+	preview.replace('\n', ' ');
+	preview = preview.simplified();
+	if (preview.size() > 18) {
+		preview = preview.left(18) + QStringLiteral("…");
 	}
 
-	menu->addAction(
-		tr::ayu_RegexFilterQuickAdd(tr::now),
-		[=]
-		{
-			RegexFilter filter;
-			filter.text = selectedText.toStdString();
-			filter.enabled = true;
-			filter.caseInsensitive = true;
-			filter.reversed = false;
-
-			controller->show(Settings::RegexEditBox(&filter, {}, getDialogIdFromPeer(item->history()->peer), true));
+	const auto dialogId = getDialogIdFromPeer(item->history()->peer);
+	auto submenu = std::make_unique<Ui::PopupMenu>(menu, menu->st());
+	if (!phrase.isEmpty()) {
+		submenu->addAction(
+			u"一键屏蔽「%1」"_q.arg(preview),
+			[=] {
+				Settings::SaveLiteralFilter(phrase, std::nullopt);
+			},
+			&st::menuIconBlock);
+		submenu->addAction(
+			u"仅在此对话屏蔽"_q,
+			[=] {
+				Settings::SaveLiteralFilter(phrase, dialogId);
+			},
+			&st::menuIconCaptionHide);
+		submenu->addAction(
+			u"编辑关键词…"_q,
+			[=] {
+				RegexFilter filter;
+				filter.text = phrase.toStdString();
+				filter.enabled = true;
+				filter.caseInsensitive = true;
+				filter.reversed = false;
+				controller->show(Settings::RegexEditBox(
+					&filter,
+					{},
+					dialogId,
+					true));
+			},
+			&st::menuIconEdit);
+	}
+	submenu->addAction(
+		u"管理过滤器"_q,
+		[=] {
+			controller->showSettings(Settings::AyuFiltersList::Id());
 		},
+		&st::menuIconAddToFolder);
+	menu->addAction(
+		u"过滤器"_q,
+		std::move(submenu),
 		&st::menuIconAddToFolder);
 }
 

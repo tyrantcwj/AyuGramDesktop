@@ -82,7 +82,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "spellcheck/spellcheck_highlight_syntax.h"
 #include "styles/style_dialogs.h"
 
-// AyuGram includes
+// iTycGram includes
 #include "ayu/ayu_settings.h"
 #include "ayu/features/filters/filters_controller.h"
 #include "ayu/features/message_shot/message_shot.h"
@@ -4222,7 +4222,7 @@ void HistoryItem::setAyuHint(const QString &hint) {
 		history()->owner().requestItemViewRefresh(this);
 		history()->owner().requestItemResize(this);
 	} catch (...) {
-		DEBUG_LOG(("AyuGram: crash in setting hint"));
+		DEBUG_LOG(("iTycGram: crash in setting hint"));
 	}
 }
 

@@ -139,7 +139,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QAction>
 #include <QtWidgets/QApplication>
 
-// AyuGram includes
+// iTycGram includes
 #include "ayu/utils/telegram_helpers.h"
 #include "styles/style_ayu_icons.h"
 #include "ayu/ui/context_menu/context_menu.h"
@@ -1929,7 +1929,7 @@ void Filler::fillContextMenuActions() {
 
 void Filler::fillHistoryActions() {
 	addToggleMuteSubmenu(true);
-	AyuUi::AddAyuGramActions(_peer, _thread, _controller, _addAction);
+	AyuUi::AddiTycGramActions(_peer, _thread, _controller, _addAction);
 	addCreateTopic();
 	addInfo();
 	AyuUi::AddJumpToBeginningAction(_peer, _thread, _controller, _addAction);
@@ -1986,7 +1986,7 @@ void Filler::fillProfileActions() {
 }
 
 void Filler::fillRepliesActions() {
-	AyuUi::AddAyuGramActions(_peer, _thread, _controller, _addAction);
+	AyuUi::AddiTycGramActions(_peer, _thread, _controller, _addAction);
 	if (_topic) {
 		addInfo();
 		AyuUi::AddJumpToBeginningAction(_peer, _thread, _controller, _addAction);
@@ -3680,7 +3680,7 @@ base::weak_qptr<Ui::BoxContent> ShowForwardMessagesBox(
 		if ((!state->submit || ayuForwarding) && successCallback) {
 			successCallback();
 		}
-		// AyuGram-changed
+		// iTycGram-changed
 	};
 
 	const auto sendMenuType = [=] {

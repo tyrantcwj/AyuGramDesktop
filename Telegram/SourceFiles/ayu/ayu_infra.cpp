@@ -1,4 +1,4 @@
-// This is the source code of iTycTG for Desktop.
+// This is the source code of iTycGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -26,7 +26,7 @@ namespace AyuInfra {
 
 void initLang() {
 	// Language is applied after startup on Windows, so the first read is often
-	// empty. Retry when the active language id changes, otherwise iTycTG
+	// empty. Retry when the active language id changes, otherwise iTycGram
 	// strings stay on the English defaults.
 	static const auto lifetime = std::make_shared<rpl::lifetime>();
 	const auto apply = [] {

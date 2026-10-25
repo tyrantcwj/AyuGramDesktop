@@ -1,4 +1,4 @@
-// This is the source code of iTycTG for Desktop.
+// This is the source code of iTycGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -71,7 +71,7 @@ constexpr auto regDateBotId = 8083294286L;
 const auto regDateBotUsername = QString("exteraAuthBot");
 
 constexpr auto regDateBotFallbackId = 6247153446L;
-const auto regDateBotFallbackUsername = QString("ityctgbot");
+const auto regDateBotFallbackUsername = QString("itycgrambot");
 
 const auto kZalgoPattern = QStringLiteral(
 	"\\p{Mn}{3,}|[\\x{202A}-\\x{202E}\\x{2066}-\\x{2069}\\x{200E}\\x{200F}\\x{061C}]");

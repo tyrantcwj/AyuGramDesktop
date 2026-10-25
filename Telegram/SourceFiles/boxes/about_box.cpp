@@ -33,7 +33,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtGui/QGuiApplication>
 #include <QtGui/QClipboard>
 
-// AyuGram includes
+// iTycGram includes
 #include "window/window_session_controller.h"
 #include "window/window_session_controller_link_info.h"
 
@@ -45,18 +45,18 @@ rpl::producer<TextWithEntities> Text() {
 		lt_gpl_link,
 		rpl::single(Ui::Text::Link(
 			"GNU GPL",
-			"https://github.com/AyuGram/AyuGramDesktop/blob/dev/LICENSE")),
+			"https://github.com/tyrantcwj/iTycGram/blob/dev/LICENSE")),
 		lt_github_link,
 		rpl::single(Ui::Text::Link(
 			"GitHub",
-			"https://github.com/AyuGram/AyuGramDesktop")),
+			"https://github.com/tyrantcwj/iTycGram")),
 		tr::marked);
 }
 
 } // namespace
 
-void AboutBox(not_null<Ui::GenericBox*> box, Window::SessionController* controller) {
-	box->setTitle(rpl::single(u"AyuGram Desktop"_q));
+void AboutBox(not_null<Ui::GenericBox*> box, Window::SessionController*) {
+	box->setTitle(rpl::single(AppName.utf16()));
 
 	auto layout = box->verticalLayout();
 
@@ -91,13 +91,11 @@ void AboutBox(not_null<Ui::GenericBox*> box, Window::SessionController* controll
 
 	box->addButton(tr::lng_close(), [=] { box->closeBox(); });
 	box->addLeftButton(
-		rpl::single(QString("@AyuGramReleases")),
-		[box, controller]
+		rpl::single(QString("GitHub")),
+		[box]
 		{
 			box->closeBox();
-			controller->showPeerByLink(Window::PeerByLinkInfo{
-				.usernameOrId = QString("ayugramreleases"),
-			});
+			File::OpenUrl(u"https://github.com/tyrantcwj/iTycGram"_q);
 		});
 
 	box->setWidth(st::aboutWidth);

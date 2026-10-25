@@ -11,6 +11,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "base/event_filter.h"
 #include "base/qt_signal_producer.h"
 #include "boxes/about_box.h"
+#include "core/version.h"
 #include "core/update_channel.h"
 #include "boxes/peer_list_controllers.h"
 #include "boxes/premium_preview_box.h"
@@ -80,7 +81,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtGui/QGuiApplication>
 #include <QtGui/QClipboard>
 
-// AyuGram includes
+// iTycGram includes
 #include "ayu/ayu_settings.h"
 #include "ayu/utils/telegram_helpers.h"
 #include "boxes/abstract_box.h"
@@ -392,8 +393,8 @@ MainMenu::MainMenu(
 	parentResized();
 
 	_telegram->setMarkedText(tr::link(
-		u"AyuGram Desktop"_q,
-		u"https://ayugram.one"_q));
+		AppName.utf16(),
+		u"https://github.com/tyrantcwj/iTycGram"_q));
 	_telegram->setLinksTrusted();
 	// The canary version is too long for the "Version {version}" form.
 	_version->setMarkedText(

@@ -1,4 +1,4 @@
-// This is the source code of iTycTG for Desktop.
+// This is the source code of iTycGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -21,7 +21,7 @@ namespace AyuAssets {
 QString appIcoPath() {
 	const auto &settings = AyuSettings::getInstance();
 	return cWorkingDir()
-		+ u"tdata/iTycTG-"_q
+		+ u"tdata/iTycGram-"_q
 		+ settings.appIcon()
 		+ u".ico"_q;
 }

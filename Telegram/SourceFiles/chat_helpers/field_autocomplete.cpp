@@ -60,7 +60,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 
 #include <QtWidgets/QApplication>
 
-// AyuGram includes
+// iTycGram includes
 #include "ayu/ayu_settings.h"
 
 

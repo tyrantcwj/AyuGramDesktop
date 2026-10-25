@@ -54,7 +54,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <gio/gio.hpp>
 #endif // __has_include(<gio/gio.hpp>)
 
-// AyuGram includes
+// iTycGram includes
 #include "ayu/ayu_settings.h"
 #include "ayu/utils/telegram_helpers.h"
 

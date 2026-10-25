@@ -421,7 +421,7 @@ StartResult Start() {
 		fclose(f);
 
 		LOG(("Opened '%1' for reading, the previous "
-			"iTycTG Desktop launch was not finished properly :( "
+			"iTycGram Desktop launch was not finished properly :( "
 			"Crash log size: %2").arg(ReportPath).arg(lastdump.size()));
 
 		return lastdump;

@@ -20,7 +20,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "apiwrap.h"
 #include "api/api_invite_links.h"
 
-// AyuGram includes
+// iTycGram includes
 #include "ayu/ayu_settings.h"
 #include "ayu/utils/telegram_helpers.h"
 

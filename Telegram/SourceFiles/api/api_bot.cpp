@@ -48,7 +48,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtGui/QGuiApplication>
 #include <QtGui/QClipboard>
 
-// AyuGram includes
+// iTycGram includes
 #include "ayu/utils/telegram_helpers.h"
 
 

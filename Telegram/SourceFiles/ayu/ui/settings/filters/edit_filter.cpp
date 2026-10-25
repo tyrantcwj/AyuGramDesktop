@@ -1,4 +1,4 @@
-// This is the source code of iTycTG for Desktop.
+// This is the source code of iTycGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -265,6 +265,78 @@ object_ptr<Ui::GenericBox> RegexEditBox(RegexFilter *filter,
 										std::optional<long long> dialogId,
 										bool showToast) {
 	return Box(RegexEditBuilder, filter, onDone, dialogId, showToast);
+}
+
+QString EscapeLiteralRegex(const QString &phrase) {
+	QString escaped;
+	escaped.reserve(phrase.size() * 2);
+	for (const auto ch : phrase) {
+		switch (ch.unicode()) {
+		case '\\':
+		case '.':
+		case '^':
+		case '$':
+		case '|':
+		case '?':
+		case '*':
+		case '+':
+		case '(':
+		case ')':
+		case '[':
+		case ']':
+		case '{':
+		case '}':
+			escaped.append('\\');
+			break;
+		default:
+			break;
+		}
+		escaped.append(ch);
+	}
+	return escaped;
+}
+
+void SaveLiteralFilter(const QString &phrase, std::optional<long long> dialogId) {
+	const auto text = phrase.trimmed();
+	if (text.isEmpty()) {
+		return;
+	}
+
+	auto &settings = AyuSettings::getInstance();
+	if (!settings.filtersEnabled()) {
+		settings.setFiltersEnabled(true);
+	}
+	if (!settings.filtersEnabledInChats()) {
+		settings.setFiltersEnabledInChats(true);
+	}
+
+	RegexFilter filter;
+	filter.id = generate_uuid_bytes();
+	filter.text = EscapeLiteralRegex(text).toStdString();
+	filter.enabled = true;
+	filter.caseInsensitive = true;
+	filter.reversed = false;
+	filter.dialogId = dialogId;
+
+	crl::async([=] {
+		AyuDatabase::addRegexFilter(filter);
+		FiltersCacheController::rebuildCache();
+		crl::on_main([=] {
+			FiltersCacheController::fireUpdate();
+			auto preview = text;
+			preview.replace('\n', ' ');
+			preview = preview.simplified();
+			if (preview.size() > 24) {
+				preview = preview.left(24) + QStringLiteral("…");
+			}
+			Ui::Toast::Show(Ui::Toast::Config{
+				.text = (dialogId.has_value()
+					? u"已在此对话屏蔽「%1」"_q
+					: u"已屏蔽包含「%1」的消息"_q).arg(preview),
+				.adaptive = true,
+			});
+		});
+	});
 }
 
 } // namespace Settings

@@ -1,4 +1,4 @@
-// This is the source code of iTycTG for Desktop.
+// This is the source code of iTycGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -75,7 +75,7 @@ void runOnce() {
 					)).send();
 					state[id] = false;
 
-					DEBUG_LOG(("[iTycTG] Sent offline for account with id %1").arg(id));
+					DEBUG_LOG(("[iTycGram] Sent offline for account with id %1").arg(id));
 				}
 			}
 		}

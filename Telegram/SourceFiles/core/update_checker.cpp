@@ -2369,7 +2369,7 @@ void UpdateApplication() {
 			} else if (KSandbox::isSnap()) {
 				return "https://snapcraft.io/telegram-desktop";
 			}
-			return "https://github.com/tyrantcwj/iTycTG";
+			return "https://github.com/tyrantcwj/iTycGram";
 #endif // OS_WIN_STORE || OS_MAC_STORE
 		}();
 		UrlClickHandler::Open(url);

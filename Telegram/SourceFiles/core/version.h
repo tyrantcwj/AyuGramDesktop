@@ -19,9 +19,9 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 
 // used in Updater.cpp and Setup.iss for Windows
 constexpr auto AppId = "{2D0A7948-8FE3-46D4-8140-52E760244127}"_cs;
-constexpr auto AppNameOld = "iTycTG for Windows"_cs;
-constexpr auto AppName = "iTycTG Desktop"_cs;
-constexpr auto AppFile = "iTycTG"_cs;
+constexpr auto AppNameOld = "iTycGram for Windows"_cs;
+constexpr auto AppName = "iTycGram Desktop"_cs;
+constexpr auto AppFile = "iTycGram"_cs;
 constexpr auto AppVersion = 7002009;
 constexpr auto AppVersionStr = "7.2.9";
 constexpr auto AppBetaVersion = false;

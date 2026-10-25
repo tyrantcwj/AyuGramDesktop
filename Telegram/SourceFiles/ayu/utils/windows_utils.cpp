@@ -1,4 +1,4 @@
-// This is the source code of iTycTG for Desktop.
+// This is the source code of iTycGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -47,9 +47,9 @@ void processIcon(QString shortcut, QString iconPath) {
 
 void processLegacy(const QString &iconPath) {
 	const auto appdata = QDir::fromNativeSeparators(qgetenv("APPDATA"));
-	auto shortcut = appdata + "/Microsoft/Internet Explorer/Quick Launch/User Pinned/TaskBar/iTycTG Desktop.lnk";
+	auto shortcut = appdata + "/Microsoft/Internet Explorer/Quick Launch/User Pinned/TaskBar/iTycGram Desktop.lnk";
 	if (!QFile::exists(shortcut)) {
-		shortcut = appdata + "/Microsoft/Internet Explorer/Quick Launch/User Pinned/TaskBar/iTycTG.lnk";
+		shortcut = appdata + "/Microsoft/Internet Explorer/Quick Launch/User Pinned/TaskBar/iTycGram.lnk";
 	}
 	if (!QFile::exists(shortcut)) {
 		return;
@@ -140,9 +140,9 @@ void processNewShortcuts(const QString &iconPath) {
 	}
 
 	const auto shortcuts = {
-		path + u"iTycTG Desktop/iTycTG.lnk"_q,
-		path + u"iTycTG/iTycTG.lnk"_q,
-		path + u"iTycTG.lnk"_q,
+		path + u"iTycGram Desktop/iTycGram.lnk"_q,
+		path + u"iTycGram/iTycGram.lnk"_q,
+		path + u"iTycGram.lnk"_q,
 	};
 	for (const auto &shortcut : shortcuts) {
 		const auto native = QDir::toNativeSeparators(shortcut).toStdWString();

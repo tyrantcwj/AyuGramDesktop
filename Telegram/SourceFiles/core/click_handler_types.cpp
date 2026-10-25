@@ -45,7 +45,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtCore/QDateTime>
 #include <QtCore/QLocale>
 
-// iTycTG includes
+// iTycGram includes
 #include "ayu/ayu_settings.h"
 #include "ayu/ayu_url_handlers.h"
 

@@ -46,7 +46,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtGui/QGuiApplication>
 #include <QtGui/QScreen>
 
-// AyuGram includes
+// iTycGram includes
 #include "ayu/ayu_settings.h"
 #include "ayu/features/streamer_mode/streamer_mode.h"
 #include "ayu/utils/telegram_helpers.h"
@@ -1025,7 +1025,7 @@ void Notification::updateNotifyDisplay() {
 				: TextWithEntities{ name };
 		};
 		auto title = options.hideNameAndPhoto
-			? TextWithEntities{ u"AyuGram Desktop"_q }
+			? TextWithEntities{ u"iTycGram Desktop"_q }
 			: reminder
 			? tr::lng_notification_reminder(tr::now, tr::marked)
 			: topicWithChat();

@@ -1,11 +1,11 @@
 [Desktop Entry]
-Name=iTycTG Desktop
-Comment=Desktop version of iTycTG - ToS breaking Telegram client
-TryExec=iTycTG
-Exec=env DESKTOPINTEGRATION=1 iTycTG -- %U
-Icon=com.ityctg.desktop
+Name=iTycGram Desktop
+Comment=Desktop version of iTycGram - ToS breaking Telegram client
+TryExec=iTycGram
+Exec=env DESKTOPINTEGRATION=1 iTycGram -- %U
+Icon=com.itycgram.desktop
 Terminal=false
-StartupWMClass=iTycTG
+StartupWMClass=iTycGram
 Type=Application
 Categories=Chat;Network;InstantMessaging;Qt;
 MimeType=x-scheme-handler/tg;x-scheme-handler/tonsite;
@@ -17,6 +17,6 @@ X-GNOME-UsesNotifications=true
 X-GNOME-SingleWindow=true
 
 [Desktop Action quit]
-Exec=iTycTG -quit
-Name=Quit iTycTG
+Exec=iTycGram -quit
+Name=Quit iTycGram
 Icon=application-exit

@@ -47,8 +47,9 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "styles/style_intro.h"
 #include "base/qt/qt_common_adapters.h"
 
-// AyuGram includes
+// iTycGram includes
 #include "boxes/about_box.h"
+#include "core/version.h"
 
 
 namespace Intro {
@@ -179,7 +180,7 @@ Widget::Widget(
 		}, lifetime());
 	}
 
-	_footer->setText(QString("AyuGram Desktop v%1").arg(currentVersionText()));
+	_footer->setText(u"%1 v%2"_q.arg(AppName.utf16(), currentVersionText()));
 }
 
 rpl::producer<> Widget::showSettingsRequested() const {

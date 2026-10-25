@@ -15,7 +15,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "history/history_item.h"
 #include "main/main_session.h"
 
-// AyuGram includes
+// iTycGram includes
 #include "ayu/ayu_settings.h"
 
 

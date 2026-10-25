@@ -103,7 +103,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtCore/QCoreApplication>
 #include <QtCore/QMimeData>
 
-// iTycTG includes
+// iTycGram includes
 #include "ayu/features/forward/ayu_forward.h"
 
 

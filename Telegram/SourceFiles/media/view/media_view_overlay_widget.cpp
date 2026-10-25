@@ -134,7 +134,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 
 #include <kurlmimedata.h>
 
-// AyuGram includes
+// iTycGram includes
 #include "ayu/ayu_settings.h"
 #include "ayu/ayu_state.h"
 #include "ayu/features/streamer_mode/streamer_mode.h"
@@ -1455,7 +1455,7 @@ bool OverlayWidget::hasCopyMediaRestriction(bool skipPremiumCheck) const {
 			return true;
 		}
 	}
-	// AyuGram: removed; allow downloading any stories
+	// iTycGram: removed; allow downloading any stories
 	return false;
 }
 
@@ -1492,7 +1492,7 @@ QSize OverlayWidget::videoSize() const {
 bool OverlayWidget::streamingRequiresControls() const {
 	return !_stories
 		&& _document;
-	// AyuGram: allow vieo messages seeking
+	// iTycGram: allow vieo messages seeking
 	//  && (!_document->isAnimation() || _document->isVideoMessage());
 }
 

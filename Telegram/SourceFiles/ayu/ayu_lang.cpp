@@ -1,4 +1,4 @@
-// This is the source code of iTycTG for Desktop.
+// This is the source code of iTycGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -83,7 +83,7 @@ void AyuLanguage::loadCachedLanguage() {
 		QJsonParseError error{};
 		const auto doc = QJsonDocument::fromJson(data, &error);
 		if (error.error == QJsonParseError::NoError) {
-			LOG(("Loading cached iTycTG language: %1").arg(finalLangPackId));
+			LOG(("Loading cached iTycGram language: %1").arg(finalLangPackId));
 			applyLanguageJson(doc);
 		}
 	}
@@ -98,7 +98,7 @@ void AyuLanguage::saveCachedLanguage(const QByteArray &json, const QString &lang
 	if (file.open(QIODevice::WriteOnly)) {
 		file.write(json);
 		file.close();
-		LOG(("Cached iTycTG language: %1").arg(langId));
+		LOG(("Cached iTycGram language: %1").arg(langId));
 	}
 }
 
@@ -115,7 +115,7 @@ void AyuLanguage::fetchLanguage(const QString &id, const QString &baseId) {
 	}
 
 	// using `jsdelivr` since China (...and maybe other?) users have some problems with GitHub
-	// https://crowdin.com/project/ityctg/discussions/6
+	// https://crowdin.com/project/itycgram/discussions/6
 	QUrl url;
 	if (!finalLangPackId.isEmpty() && !baseId.isEmpty() && !needFallback) {
 		url.setUrl(qsl("https://cdn.jsdelivr.net/gh/AyuGram/Languages@l10n_main/values/langs/%1/Shared.json").arg(
@@ -137,7 +137,7 @@ void AyuLanguage::fetchFinished() {
 	auto statusCode = _chkReply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
 
 	if (statusCode == 404 && !langPackId.isEmpty() && !langPackBaseId.isEmpty() && !needFallback) {
-		LOG(("iTycTG Language not found! Fallback to main language: %1...").arg(langPackBaseId));
+		LOG(("iTycGram Language not found! Fallback to main language: %1...").arg(langPackBaseId));
 		needFallback = true;
 		_chkReply->disconnect();
 		fetchLanguage("", langPackBaseId);
@@ -164,12 +164,12 @@ void AyuLanguage::fetchError(QNetworkReply::NetworkError e) {
 		const auto id = Lang::GetInstance().id();
 
 		if (!id.isEmpty() && !baseId.isEmpty() && !needFallback) {
-			LOG(("iTycTG Language not found! Fallback to main language: %1...").arg(baseId));
+			LOG(("iTycGram Language not found! Fallback to main language: %1...").arg(baseId));
 			needFallback = true;
 			_chkReply->disconnect();
 			fetchLanguage("", baseId);
 		} else {
-			LOG(("iTycTG Language not found!"));
+			LOG(("iTycGram Language not found!"));
 			_chkReply = nullptr;
 		}
 	}
@@ -206,9 +206,9 @@ void AyuLanguage::applyLanguageJson(QJsonDocument doc) {
 			val = val.replace(qsl("%1$s"), qsl("{item1}")).replace(qsl("%2$s"), qsl("{item2}"));
 		}
 
-		val.replace(qsl("AyuGram"), qsl("iTycTG"));
-		val.replace(qsl("AYUGRAM"), qsl("ITYCTG"));
-		val.replace(qsl("ayugram"), qsl("ityctg"));
+		val.replace(qsl("AyuGram"), qsl("iTycGram"));
+		val.replace(qsl("AYUGRAM"), qsl("ITYCGRAM"));
+		val.replace(qsl("ayugram"), qsl("itycgram"));
 
 		Lang::GetInstance().resetValue(key.toUtf8());
 		Lang::GetInstance().applyValue(key.toUtf8(), val.toUtf8());

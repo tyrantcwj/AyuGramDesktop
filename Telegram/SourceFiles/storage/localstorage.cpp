@@ -38,7 +38,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <unistd.h>
 #endif // Q_OS_WIN
 
-// iTycTG includes
+// iTycGram includes
 #include "ayu/ayu_settings.h"
 
 
@@ -561,7 +561,7 @@ const QString &readAutoupdatePrefixRaw() {
 			return AutoupdatePrefix(value);
 		}
 	}
-	return AutoupdatePrefix("https://github.com/tyrantcwj/iTycTG/");
+	return AutoupdatePrefix("https://github.com/tyrantcwj/iTycGram/");
 }
 
 void writeAutoupdatePrefix(const QString &prefix) {
@@ -570,7 +570,7 @@ void writeAutoupdatePrefix(const QString &prefix) {
 	}
 
 	const auto current = readAutoupdatePrefixRaw();
-    const auto fixedPrefix = QString::fromStdString("https://github.com/tyrantcwj/iTycTG/");
+    const auto fixedPrefix = QString::fromStdString("https://github.com/tyrantcwj/iTycGram/");
 	if (current != fixedPrefix) {
 		AutoupdatePrefix(fixedPrefix);
 		QFile f(autoupdatePrefixFile());

@@ -1,4 +1,4 @@
-// This is the source code of iTycTG for Desktop.
+// This is the source code of iTycGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -25,4 +25,7 @@ object_ptr<Ui::GenericBox> RegexEditBox(RegexFilter *filter,
 										const Fn<void(RegexFilter)> &onDone,
 										std::optional<long long> dialogId = std::nullopt,
 										bool showToast = false);
+
+// Saves a case-insensitive literal keyword filter and turns filters on.
+void SaveLiteralFilter(const QString &phrase, std::optional<long long> dialogId);
 } // namespace Settings

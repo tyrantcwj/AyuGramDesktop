@@ -1,6 +1,6 @@
-# Agent Guide for iTycTG Desktop
+# Agent Guide for iTycGram Desktop
 
-This guide defines repository-wide instructions for coding agents working with the iTycTG Desktop (Telegram Desktop fork) codebase.
+This guide defines repository-wide instructions for coding agents working with the iTycGram Desktop (Telegram Desktop fork) codebase.
 
 Avoid building the project.
 
@@ -219,11 +219,11 @@ _limit = kDefaultLimit; // the server rejects anything larger
 // on every reconnect.
 ```
 
-**iTycTG includes in upstream files:**
+**iTycGram includes in upstream files:**
 
-When an upstream (Telegram Desktop) file needs an extra include for iTycTG
+When an upstream (Telegram Desktop) file needs an extra include for iTycGram
 code, never mix it into the upstream include list. Put all such includes in a
-separate block after the last upstream include, headed by `// iTycTG includes`,
+separate block after the last upstream include, headed by `// iTycGram includes`,
 with one empty line before the marker and two empty lines after the block.
 If the file already has this block, append to it instead of creating another.
 Files under `Telegram/SourceFiles/ayu/` don't need the marker.
@@ -232,7 +232,7 @@ Files under `Telegram/SourceFiles/ayu/` don't need the marker.
 #include "storage/file_upload.h"
 #include "storage/storage_account.h"
 
-// iTycTG includes
+// iTycGram includes
 #include "ayu/ayu_settings.h"
 #include "ayu/utils/telegram_helpers.h"
 #include "window/window_controller.h"

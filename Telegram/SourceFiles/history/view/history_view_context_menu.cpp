@@ -121,7 +121,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtGui/QGuiApplication>
 #include <QtGui/QClipboard>
 
-// AyuGram includes
+// iTycGram includes
 #include "ayu/ayu_settings.h"
 #include "ayu/features/forward/ayu_forward.h"
 #include "ayu/ui/context_menu/context_menu.h"
@@ -1411,6 +1411,11 @@ void AddMessageActions(
 	if (request.item) {
 		const auto context = request.view ? request.view->context() : Context::History;
 		AyuUi::AddHistoryAction(menu, request.item);
+		AyuUi::AddCreateFilterAction(
+			menu,
+			list->controller(),
+			request.item,
+			request.selectedText.rich.text);
 		AyuUi::AddHideMessageAction(menu, request.item);
 		AyuUi::AddUserMessagesAction(menu, request.item);
 		AyuUi::AddRepeatMessageAction(menu, request.item, context);
@@ -3087,7 +3092,7 @@ TextWithEntities TransribedText(not_null<HistoryItem*> item) {
 }
 
 bool ItemHasTtl(HistoryItem *item) {
-	return false; // AyuGram: allow downloading files with ttl
+	return false; // iTycGram: allow downloading files with ttl
 }
 
 } // namespace HistoryView

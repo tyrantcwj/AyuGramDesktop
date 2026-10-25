@@ -136,7 +136,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtCore/QCoreApplication>
 #include <QtCore/QMimeData>
 
-// AyuGram includes
+// iTycGram includes
 #include "ayu/ayu_settings.h"
 #include "ayu/features/filters/filters_cache_controller.h"
 #include "ayu/ui/context_menu/context_menu.h"
@@ -3674,6 +3674,9 @@ void HistoryInner::showContextMenu(QContextMenuEvent *e, bool showFromTouch) {
 			addReplyAction(partItemOrLeader);
 			addTodoListAction(partItemOrLeader);
 			addItemActions(item, albumPartItem);
+			if (item) {
+				AyuUi::AddCreateFilterAction(_menu, _controller, item, QString());
+			}
 			if (item && !isUponSelected) {
 				const auto media = (view ? view->media() : nullptr);
 				const auto mediaHasTextForCopy = media && media->hasTextForCopy();

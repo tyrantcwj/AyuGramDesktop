@@ -97,7 +97,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 
 #include <QSvgRenderer>
 
-// AyuGram includes
+// iTycGram includes
 #include "ayu/ayu_settings.h"
 
 

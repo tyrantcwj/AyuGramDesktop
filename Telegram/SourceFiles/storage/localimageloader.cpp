@@ -46,7 +46,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtCore/QBuffer>
 #include <QtGui/QImageWriter>
 
-// iTycTG includes
+// iTycGram includes
 #include "ayu/utils/telegram_helpers.h"
 
 

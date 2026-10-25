@@ -1,3 +1,0 @@
-[D-BUS Service]
-Name=com.ityctg.desktop
-Exec=@CMAKE_INSTALL_FULL_BINDIR@/iTycTG

@@ -108,7 +108,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "storage/file_upload.h"
 #include "storage/storage_account.h"
 
-// iTycTG includes
+// iTycGram includes
 #include "ayu/ayu_settings.h"
 #include "ayu/ayu_worker.h"
 #include "ayu/utils/telegram_helpers.h"

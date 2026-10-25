@@ -1,5 +1,5 @@
-# iTycTG
+# iTycGram
 
-iTycTG — ветка Telegram Desktop с китайским интерфейсом настроек.
+iTycGram — ветка Telegram Desktop с китайским интерфейсом настроек.
 
 Исходный код основан на Telegram Desktop и последующих изменениях. Авторские права исходных авторов сохранены, лицензия GPL-3.0. Описание на китайском: [README.md](README.md).

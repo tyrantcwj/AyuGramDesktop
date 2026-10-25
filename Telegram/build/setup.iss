@@ -1,8 +1,8 @@
-#define MyAppShortName "iTycTG"
-#define MyAppName "iTycTG Desktop"
-#define MyAppPublisher "iTycTG"
-#define MyAppURL "https://github.com/tyrantcwj/iTycTG"
-#define MyAppExeName "iTycTG.exe"
+#define MyAppShortName "iTycGram"
+#define MyAppName "iTycGram Desktop"
+#define MyAppPublisher "iTycGram"
+#define MyAppURL "https://github.com/tyrantcwj/iTycGram"
+#define MyAppExeName "iTycGram.exe"
 #define MyAppId "2D0A7948-8FE3-46D4-8140-52E760244127"
 #define CurrentYear GetDateTimeString('yyyy','','')
 

@@ -1,4 +1,4 @@
-// This is the source code of iTycTG for Desktop.
+// This is the source code of iTycGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -681,7 +681,7 @@ void BuildOther(SectionBuilder &builder, AyuSectionBuilder &ayu) {
 const auto kMeta = BuildHelper({
 	.id = AyuGhost::Id(),
 	.parentId = AyuMain::Id(),
-	.title = u"iTycTG"_q,
+	.title = u"iTycGram"_q,
 	.icon = &st::menuIconGroupReactions,
 }, [](SectionBuilder &builder) {
 	auto ayu = AyuSectionBuilder(builder);
@@ -700,7 +700,7 @@ const auto kMeta = BuildHelper({
 } // namespace
 
 rpl::producer<QString> AyuGhost::title() {
-	return rpl::single(QString("iTycTG"));
+	return rpl::single(QString("iTycGram"));
 }
 
 AyuGhost::AyuGhost(

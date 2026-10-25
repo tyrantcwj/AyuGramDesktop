@@ -1,4 +1,4 @@
-// This is the source code of iTycTG for Desktop.
+// This is the source code of iTycGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -69,7 +69,7 @@ void BuildVersionInfo(SectionBuilder &builder) {
 			.widget = object_ptr<Ui::FlatLabel>(
 				ctx.container,
 				rpl::single(
-					QString("iTycTG 桌面版 v")
+					QString("iTycGram 桌面版 v")
 					+ QString::fromLatin1(AppVersionStr)),
 				st::boxTitle),
 			.align = style::al_top,
@@ -100,7 +100,7 @@ void BuildCategories(SectionBuilder &builder) {
 	builder.addSubsectionTitle(tr::ayu_CategoriesHeader());
 
 	builder.addSectionButton({
-		.title = rpl::single(QString("iTycTG")),
+		.title = rpl::single(QString("iTycGram")),
 		.targetSection = AyuGhost::Id(),
 		.icon = { &st::menuIconGroupReactions },
 	});
@@ -139,7 +139,7 @@ void BuildLinks(SectionBuilder &builder) {
 	builder.addSubsectionTitle(tr::ayu_LinksHeader());
 
 	const auto openProject = [] {
-		QDesktopServices::openUrl(QString("https://github.com/tyrantcwj/iTycTG"));
+		QDesktopServices::openUrl(QString("https://github.com/tyrantcwj/iTycGram"));
 	};
 
 	builder.addButton({
@@ -167,7 +167,7 @@ void BuildLinks(SectionBuilder &builder) {
 		.id = u"ayu/website"_q,
 		.title = tr::ayu_LinksDocumentation(),
 		.icon = { &st::menuIconIpAddress },
-		.label = rpl::single(QString("github.com/tyrantcwj/iTycTG")),
+		.label = rpl::single(QString("github.com/tyrantcwj/iTycGram")),
 		.onClick = openProject,
 	});
 

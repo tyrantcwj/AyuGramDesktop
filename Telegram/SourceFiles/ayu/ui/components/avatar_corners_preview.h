@@ -1,4 +1,4 @@
-// This is the source code of iTycTG for Desktop.
+// This is the source code of iTycGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -32,9 +32,6 @@ protected:
 	void mouseReleaseEvent(QMouseEvent *e) override;
 
 private:
-	void resolveChannel();
-	void subscribeToUpdates();
-
 	const not_null<Window::SessionController*> _controller;
 	Ui::EmptyUserpic _emptyUserpic;
 	PeerData *_peer = nullptr;

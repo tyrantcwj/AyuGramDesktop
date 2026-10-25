@@ -89,11 +89,11 @@ public:
 
 		return _peer;
 	}
-	// AyuGram
+	// iTycGram
 	void setPeer(not_null<PeerData*> peer) {
 		_peer = peer;
 	}
-	// AyuGram
+	// iTycGram
 
 	[[nodiscard]] PeerListRowId id() const {
 		return _id;

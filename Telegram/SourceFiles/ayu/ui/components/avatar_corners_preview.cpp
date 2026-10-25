@@ -1,4 +1,4 @@
-// This is the source code of iTycTG for Desktop.
+// This is the source code of iTycGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -6,7 +6,6 @@
 // Copyright @Radolyn, 2026
 #include "ayu/ui/components/avatar_corners_preview.h"
 
-#include "apiwrap.h"
 #include "data/data_peer.h"
 #include "data/data_peer_id.h"
 #include "data/data_session.h"
@@ -19,7 +18,8 @@
 #include "ui/userpic_view.h"
 #include "ui/effects/ripple_animation.h"
 #include "window/window_session_controller.h"
-#include "window/window_session_controller_link_info.h"
+
+#include <QDesktopServices>
 
 AvatarCornersPreview::AvatarCornersPreview(
 	QWidget *parent,
@@ -30,11 +30,10 @@ AvatarCornersPreview::AvatarCornersPreview(
 	Ui::EmptyUserpic::UserpicColor(
 		Data::DecideColorIndex(
 			peerFromChannel(ChannelId(2331068091)))),
-	u"iTycTG Releases"_q) {
+	u"iTycGram"_q) {
 	const auto &row = st::defaultDialogRow;
 	setFixedHeight(row.height);
 	setCursor(Qt::PointingHandCursor);
-	resolveChannel();
 }
 
 void AvatarCornersPreview::paintEvent(QPaintEvent *e) {
@@ -63,7 +62,7 @@ void AvatarCornersPreview::paintEvent(QPaintEvent *e) {
 		_emptyUserpic.paintCircle(p, userpicX, userpicY, width(), photoSize);
 	}
 
-	const auto nameText = u"iTycTG Releases"_q;
+	const auto nameText = u"iTycGram"_q;
 	p.setPen(st::dialogsNameFg);
 	p.setFont(st::semiboldFont);
 	p.drawText(row.nameLeft + xShift, row.nameTop + st::semiboldFont->ascent, nameText);
@@ -95,44 +94,6 @@ void AvatarCornersPreview::mouseReleaseEvent(QMouseEvent *e) {
 		_ripple->lastStop();
 	}
 	if (e->button() == Qt::LeftButton && rect().contains(e->pos())) {
-		_controller->showPeerByLink(Window::PeerByLinkInfo{
-			.usernameOrId = u"iTycTGReleases"_q,
-		});
+		QDesktopServices::openUrl(u"https://github.com/tyrantcwj/iTycGram"_q);
 	}
-}
-
-void AvatarCornersPreview::resolveChannel() {
-	const auto session = &_controller->session();
-	_peer = session->data().peerByUsername(u"iTycTGReleases"_q);
-	if (_peer) {
-		_peer->loadUserpic();
-		subscribeToUpdates();
-		return;
-	}
-	const auto weak = base::make_weak(this);
-	session->api().request(MTPcontacts_ResolveUsername(
-		MTP_flags(0),
-		MTP_string(u"iTycTGReleases"_q),
-		MTP_string()
-	)).done([=](const MTPcontacts_ResolvedPeer &result) {
-		if (const auto strong = weak.get()) {
-			session->data().processUsers(result.data().vusers());
-			session->data().processChats(result.data().vchats());
-			strong->_peer = session->data().peerLoaded(
-				peerFromMTP(result.data().vpeer()));
-			if (strong->_peer) {
-				strong->_peer->loadUserpic();
-				strong->subscribeToUpdates();
-			}
-			strong->update();
-		}
-	}).send();
-}
-
-void AvatarCornersPreview::subscribeToUpdates() {
-	if (!_peer) return;
-	_peer->session().downloaderTaskFinished(
-	) | rpl::on_next([=] {
-		update();
-	}, lifetime());
 }

@@ -1,4 +1,4 @@
-// This is the source code of iTycTG for Desktop.
+// This is the source code of iTycGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -357,7 +357,7 @@ void FilterUtils::publishFilters() {
 
 	QHttpPart titlePart;
 	titlePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"title\""));
-	titlePart.setBody("iTycTG Filters");
+	titlePart.setBody("iTycGram Filters");
 
 	multiPart->append(contentPart);
 	multiPart->append(syntaxPart);
