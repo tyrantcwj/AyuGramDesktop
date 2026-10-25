@@ -426,12 +426,14 @@ void ApiWrap::savePinnedOrder(Data::Folder *folder) {
 		}
 		Unexpected("Key type in pinnedDialogsOrder().");
 	};
+	const auto serverLimit = _session->data().serverPinnedChatsLimit(folder);
+	const auto count = std::min(int(order.size()), serverLimit);
 	auto peers = QVector<MTPInputDialogPeer>();
-	peers.reserve(order.size());
-	ranges::transform(
-		order,
-		ranges::back_inserter(peers),
-		input);
+	peers.reserve(count);
+	for (auto i = 0; i != count; ++i) {
+		peers.push_back(input(order[i]));
+	}
+	_session->data().rememberLocalExtraPins(folder);
 	request(MTPmessages_ReorderPinnedDialogs(
 		MTP_flags(MTPmessages_ReorderPinnedDialogs::Flag::f_force),
 		MTP_int(folder ? folder->id() : 0),

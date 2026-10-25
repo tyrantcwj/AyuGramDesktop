@@ -14,6 +14,7 @@
 
 #include <map>
 #include <unordered_set>
+#include <vector>
 
 
 namespace Main {
@@ -264,6 +265,9 @@ public:
 	void removeShadowBan(int64 id);
 	[[nodiscard]] bool isShadowBanned(const int64 id) const { return _shadowBanIds.contains(id); }
 	[[nodiscard]] const std::unordered_set<int64> &shadowBanIds() const { return _shadowBanIds; }
+
+	[[nodiscard]] std::vector<int64> localExtraPins(int64 userId, int folderId) const;
+	void setLocalExtraPins(int64 userId, int folderId, const std::vector<int64> &ids);
 
 	void validate();
 
@@ -628,6 +632,7 @@ private:
 	rpl::variable<bool> _saveMessagesHistory = true;
 	rpl::variable<bool> _saveForBots = false;
 	std::unordered_set<int64> _shadowBanIds;
+	std::map<std::string, std::vector<int64>> _localExtraPins;
 	rpl::variable<bool> _filtersEnabled = false;
 	rpl::variable<bool> _filtersEnabledInChats = false;
 	rpl::variable<bool> _hideFromBlocked = false;

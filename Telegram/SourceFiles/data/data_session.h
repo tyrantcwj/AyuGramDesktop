@@ -536,6 +536,9 @@ public:
 		FilterId filterId,
 		not_null<History*> history) const;
 	[[nodiscard]] int pinnedChatsLimit(Folder *folder) const;
+	[[nodiscard]] int serverPinnedChatsLimit(Folder *folder) const;
+	void rememberLocalExtraPins(Folder *folder);
+	void appendLocalExtraPins(Folder *folder);
 	[[nodiscard]] int pinnedChatsLimit(FilterId filterId) const;
 	[[nodiscard]] int pinnedChatsLimit(not_null<Forum*> forum) const;
 	[[nodiscard]] int pinnedChatsLimit(

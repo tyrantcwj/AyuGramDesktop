@@ -7,6 +7,9 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "data/data_session.h"
 
+#include "ayu/ayu_settings.h"
+#include "data/data_peer_id.h"
+
 #include "main/main_session.h"
 #include "main/main_session_settings.h"
 #include "main/main_app_config.h"
@@ -2827,6 +2830,7 @@ void Session::applyPinnedChats(
 		});
 	}
 	chatsList(folder)->pinned()->applyList(this, list);
+	appendLocalExtraPins(folder);
 	notifyPinnedDialogsOrderUpdated();
 }
 
@@ -2942,11 +2946,58 @@ bool Session::pinnedCanPin(
 		|| (i->always().size() < pinnedChatsLimit(filterId));
 }
 
-int Session::pinnedChatsLimit(Data::Folder *folder) const {
+int Session::pinnedChatsLimit(Data::Folder *) const {
+	// The account can pin more chats than Telegram stores. The extra ones
+	// stay in the local list and are kept across server updates.
+	return 1000;
+}
+
+int Session::serverPinnedChatsLimit(Data::Folder *folder) const {
 	const auto limits = Data::PremiumLimits(_session);
 	return folder
 		? limits.dialogsFolderPinnedCurrent()
 		: limits.dialogsPinnedCurrent();
+}
+
+void Session::rememberLocalExtraPins(Data::Folder *folder) {
+	const auto &order = pinnedChatsOrder(folder);
+	const auto serverLimit = serverPinnedChatsLimit(folder);
+	auto extras = std::vector<int64>();
+	if (int(order.size()) > serverLimit) {
+		extras.reserve(order.size() - serverLimit);
+	}
+	for (auto i = serverLimit; i < int(order.size()); ++i) {
+		const auto history = order[i].history();
+		if (!history) {
+			continue;
+		}
+		extras.push_back(int64(SerializePeerId(history->peer->id)));
+	}
+	AyuSettings::getInstance().setLocalExtraPins(
+		int64(_session->userId().bare),
+		folder ? folder->id() : 0,
+		extras);
+}
+
+void Session::appendLocalExtraPins(Data::Folder *folder) {
+	const auto ids = AyuSettings::getInstance().localExtraPins(
+		int64(_session->userId().bare),
+		folder ? folder->id() : 0);
+	if (ids.empty()) {
+		return;
+	}
+	const auto list = chatsList(folder)->pinned();
+	for (const auto serialized : ids) {
+		const auto peerId = DeserializePeerId(quint64(serialized));
+		if (!peerId) {
+			continue;
+		}
+		const auto history = this->history(peerId);
+		if (!history->folderKnown() || history->folder() != folder) {
+			continue;
+		}
+		list->addPinned(history);
+	}
 }
 
 int Session::pinnedChatsLimit(FilterId filterId) const {
@@ -2969,16 +3020,7 @@ int Session::pinnedChatsLimit(not_null<Data::SavedMessages*> saved) const {
 
 rpl::producer<int> Session::maxPinnedChatsLimitValue(
 		Data::Folder *folder) const {
-	// Premium limit from appconfig.
-	// We always use premium limit in the MainList limit producer,
-	// because it slices the list to that limit. We don't want to slice
-	// premium-ly added chats from the pinned list because of sync issues.
-	return _session->appConfig().value(
-	) | rpl::map([folder, limits = Data::PremiumLimits(_session)] {
-		return folder
-			? limits.dialogsFolderPinnedPremium()
-			: limits.dialogsPinnedPremium();
-	});
+	return rpl::single(pinnedChatsLimit(folder));
 }
 
 rpl::producer<int> Session::maxPinnedChatsLimitValue(
