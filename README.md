@@ -1,3 +1,5 @@
+![iTycGram](docs/assets/logo.png)
+
 # iTycGram
 
 iTycGram 是一份 Telegram Desktop 分支，界面设置为简体中文。
