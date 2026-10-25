@@ -14,6 +14,7 @@
 #include "ayu/ui/ayu_logo.h"
 #include "features/translator/ayu_translator.h"
 #include "lang/lang_instance.h"
+#include "rpl/lifetime.h"
 #include "ui/chat/chat_style_radius.h"
 #include "utils/rc_manager.h"
 
@@ -24,14 +25,27 @@
 namespace AyuInfra {
 
 void initLang() {
-	QString id = Lang::GetInstance().id();
-	QString baseId = Lang::GetInstance().baseId();
-	if (id.isEmpty()) {
-		LOG(("Language is not loaded"));
-		return;
-	}
-	AyuLanguage::init();
-	AyuLanguage::currentInstance()->fetchLanguage(id, baseId);
+	// Language is applied after startup on Windows, so the first read is often
+	// empty. Retry when the active language id changes, otherwise AyuGram
+	// strings stay on the English defaults.
+	static const auto lifetime = std::make_shared<rpl::lifetime>();
+	const auto apply = [] {
+		const auto id = Lang::GetInstance().id();
+		const auto baseId = Lang::GetInstance().baseId();
+		if (id.isEmpty()) {
+			LOG(("Language is not loaded"));
+			return;
+		}
+		AyuLanguage::init();
+		if (const auto instance = AyuLanguage::currentInstance()) {
+			instance->fetchLanguage(id, baseId);
+		}
+	};
+	apply();
+	Lang::GetInstance().idChanges(
+	) | rpl::on_next([=](const QString &) {
+		apply();
+	}, *lifetime);
 }
 
 void initUiSettings() {
