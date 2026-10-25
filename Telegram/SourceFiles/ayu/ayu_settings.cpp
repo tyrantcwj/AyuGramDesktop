@@ -1,4 +1,4 @@
-// This is the source code of AyuGram for Desktop.
+// This is the source code of iTycTG for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -392,16 +392,16 @@ void AyuSettings::load() {
 			});
 			p["useGlobalGhostMode"] = true;
 
-			LOG(("AyuGramSettings: migrated ghost mode settings to per-account format"));
+			LOG(("iTycTGSettings: migrated ghost mode settings to per-account format"));
 		}
 
 		try {
 			from_json(p, settings);
 		} catch (...) {
-			LOG(("AyuGramSettings: failed to parse settings file"));
+			LOG(("iTycTGSettings: failed to parse settings file"));
 		}
 	} catch (...) {
-		LOG(("AyuGramSettings: failed to read settings file (not json-like)"));
+		LOG(("iTycTGSettings: failed to read settings file (not json-like)"));
 	}
 
 	if (cGhost()) {

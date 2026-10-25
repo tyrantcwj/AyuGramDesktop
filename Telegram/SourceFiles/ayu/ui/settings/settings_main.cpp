@@ -1,4 +1,4 @@
-// This is the source code of AyuGram for Desktop.
+// This is the source code of iTycTG for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -28,7 +28,6 @@
 #include "ui/widgets/labels.h"
 #include "ui/wrap/vertical_layout.h"
 #include "window/window_session_controller.h"
-#include "window/window_session_controller_link_info.h"
 
 #include <QDesktopServices>
 
@@ -70,7 +69,7 @@ void BuildVersionInfo(SectionBuilder &builder) {
 			.widget = object_ptr<Ui::FlatLabel>(
 				ctx.container,
 				rpl::single(
-					QString("AyuGram 桌面版 v")
+					QString("iTycTG 桌面版 v")
 					+ QString::fromLatin1(AppVersionStr)),
 				st::boxTitle),
 			.align = style::al_top,
@@ -101,7 +100,7 @@ void BuildCategories(SectionBuilder &builder) {
 	builder.addSubsectionTitle(tr::ayu_CategoriesHeader());
 
 	builder.addSectionButton({
-		.title = rpl::single(QString("AyuGram")),
+		.title = rpl::single(QString("iTycTG")),
 		.targetSection = AyuGhost::Id(),
 		.icon = { &st::menuIconGroupReactions },
 	});
@@ -139,49 +138,37 @@ void BuildLinks(SectionBuilder &builder) {
 
 	builder.addSubsectionTitle(tr::ayu_LinksHeader());
 
-	const auto controller = builder.controller();
+	const auto openProject = [] {
+		QDesktopServices::openUrl(QString("https://github.com/tyrantcwj/iTycTG"));
+	};
 
 	builder.addButton({
 		.id = u"ayu/channel"_q,
 		.title = tr::ayu_LinksChannel(),
 		.icon = { &st::menuIconChannel },
-		.label = rpl::single(QString("@ayugram")),
-		.onClick = [=] {
-			controller->showPeerByLink(Window::PeerByLinkInfo{
-				.usernameOrId = QString("ayugram"),
-			});
-		},
+		.label = rpl::single(QString("GitHub")),
+		.onClick = openProject,
 	});
 	builder.addButton({
 		.id = u"ayu/chat"_q,
 		.title = tr::ayu_LinksChats(),
 		.icon = { &st::menuIconChats },
-		.label = rpl::single(QString("@ayugramchat")),
-		.onClick = [=] {
-			controller->showPeerByLink(Window::PeerByLinkInfo{
-				.usernameOrId = QString("ayugramchat"),
-			});
-		},
+		.label = rpl::single(QString("GitHub")),
+		.onClick = openProject,
 	});
 	builder.addButton({
 		.id = u"ayu/crowdin"_q,
 		.title = tr::ayu_LinksTranslate(),
 		.icon = { &st::menuIconTranslate },
-		.label = rpl::single(QString("Crowdin")),
-		.onClick = [=] {
-			QDesktopServices::openUrl(
-				QString("https://translate.ayugram.one"));
-		},
+		.label = rpl::single(QString("GitHub")),
+		.onClick = openProject,
 	});
 	builder.addButton({
 		.id = u"ayu/website"_q,
 		.title = tr::ayu_LinksDocumentation(),
 		.icon = { &st::menuIconIpAddress },
-		.label = rpl::single(QString("docs.ayugram.one")),
-		.onClick = [=] {
-			QDesktopServices::openUrl(
-				QString("https://docs.ayugram.one"));
-		},
+		.label = rpl::single(QString("github.com/tyrantcwj/iTycTG")),
+		.onClick = openProject,
 	});
 
 	builder.addSkip();

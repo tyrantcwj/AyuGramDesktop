@@ -1,4 +1,4 @@
-// This is the source code of AyuGram for Desktop.
+// This is the source code of iTycTG for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -12,7 +12,7 @@
 
 namespace {
 
-constexpr auto kPrimaryUrl = "https://update.ayugram.one/rc/current/desktop2";
+constexpr auto kPrimaryUrl = "https://github.com/tyrantcwj/iTycTG/rc/current/desktop2";
 constexpr auto kExteraUrl = "https://api.exteragram.app/api/v1/profiles/compact";
 constexpr auto kFetchTimeout = 15 * 1000;
 
